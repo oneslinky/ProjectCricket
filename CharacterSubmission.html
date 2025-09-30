@@ -48,6 +48,18 @@
         <h1>
            <strong>Welcome to Multiverse All Star Battlefront</strong> 
         </h1>
+        <div id = "Intro/Disclaimer" class="overlay"> 
+            <div class="popup">
+                <h2>Disclaimer and Particpation Agreement</h2>
+                <p>By clicking "I Agree", you consent to participate in the Multiverse All Star Battlefront game. 
+                    You acknowledge that you have read and understood the <a href = "*/insert rules and guidelines link*/" target ="_blank">rules and guidelines</a>of the game. 
+                    You agree to abide by the <a href = "*/insert the terms and conditions link*/" target ="_blank">terms and conditions</a> set forth by the game developers. 
+                    If you do not agree to these terms, please click close the window and exit the game.
+                </p>
+                <button onclick="document.getElementById('Intro/Disclaimer').style.display='none';">I Agree</button>
+            </div>
+        </div>
+
         <div id = "timer">0:10</div>
         <p>
             You have 5 minutes to describe your character. 
@@ -70,6 +82,7 @@
          </div>
 
         <script>
+            window.onload = showdiclaimer;
             let resetBtn = document.getElementById('resetBtn');
             let submitBtn = document.getElementById('submitBtn');
             let countdownTime = 10;
@@ -109,7 +122,9 @@
         function showPopup(){
             document.getElementById('popupOverlay').style.display = 'flex';
         }
-
+        function showdiclaimer(){
+            document.getElementById('Intro/Disclaimer').style.display = 'flex';
+        }
 
         submitBtn.addEventListener('click', function(){
             let description = descriptionBox.value;
