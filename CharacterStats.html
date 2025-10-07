@@ -2,23 +2,75 @@
 <html lang = "en">
     <head>
         <meta charset = "UTF-8">
-        <title> Character Stats</title>
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Tektur:wght@400..900&display=swap" rel="stylesheet">
-        <style>
-            body { font-family: 'Tektur', sans-serif;}
-        </style>
+        <title>Character Stats</title>
+        <link rel="stylesheet" href="StyleSheet.css">
     </head>
     <body>
+    
         <h1>
-           <strong>Character Stats Page</strong> 
+           <strong>Character Overview</strong> 
         </h1>
         <p>
             This is where character stats will be displayed after submission.
         </p>
         <h2>
-            <strong>Character Overview</strong>
+            <strong>Character Story Overview</strong>
         </h2>
+        <p>
+            This section will provide a brief overview of the character, including their name, age, and background story.
+        </p>
+        <h2><strong>Character Stats</strong></h2>
+        <p>
+            This section will display the character's stats, such as Health Points, Mana Points, Attack Power, Defense, Adiligty, and Luck.
+        </p>
+        <h2><strong>Character Abilities</strong></h2>
+        <p>
+            This section will list the character's abilities, including their basic, special, and Ultimate ability. 
+            Each ability will have a brief description and what it does
+        </p>
+        <h2><strong>Character Apperance</strong></h2>
+        <p>
+            This section will provide a visual representation of the character, including their physical appearance, clothing, and any unique features.
+            This image of the character apperance will be generated using an AI image generator based on the description provided during character submission.
+        </p>
+        <div id="confirmbackPopup" class = "overlay">
+            <div class = "popup">
+                <h2>Confirm Navigation</h2>
+                <p>Are you sure you want to return to the Character Submission page? Any unsaved changes will be lost.</p>
+                <button onclick="document.getElementById('confirmbackPopup').style.display='none';">Cancel</button>
+                <button id="confirmBackYes">Go Back</button>
+            </div>
+        </div>
+        <div id="confirmsubmitPopup" class = "overlay">
+            <div class = "popup">
+                <h2>Confirm Submission</h2>
+                <p>Are you sure you want to confirm this character? Once confirmed, you will not be able to make further changes and will be unable to go back.</p>
+                <button onclick="document.getElementById('confirmsubmitPopup').style.display='none';">Cancel</button>
+                <button onclick="window.location.href='Loading.html';">Confirm</button>
+            </div>
+        </div>
+        <button id = "backButton">Return to Character Submission Page</button>
+        <button id = "submitBtn">Confirm character </button>
+        <script>
+            function showbackpopup(){
+                document.getElementById('confirmbackPopup').style.display='flex';
+            }
+            function showsubmitpopup(){
+                document.getElementById('confirmsubmitPopup').style.display='flex';
+            }
+            document.getElementById("backButton").onclick = function () {
+                showbackpopup();
+            };
+            document.getElementById('confirmBackYes').addEventListener('click', function(){
+                try{
+                    sessionStorage.setItem('suppressDisclaimerOnReturn', '1');
+                }catch(e){
+                }
+                window.location.href = 'CharacterSubmission.html';
+            });
+            document.getElementById("submitBtn").onclick = function () {
+                showsubmitpopup();
+            };
+        </script>
     </body>
 </html>

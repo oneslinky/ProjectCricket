@@ -1,4 +1,66 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Tektur:wght@400;700;900&display=swap');
+
 body{
-    background-color: blueviolet;
+    background-color: #e7d1ff;
+    font-family: 'Tektur', 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
 }
-/* This will be the style sheet for the CS 370 project */ 
+#timer {font-size: 48px; font-weight: bold;}
+.overlay {
+    display: none;
+    position: fixed;
+    top:0; left: 0;
+    width: 100%; height: 100%;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+.popup{
+    background: rgba(123, 93, 168, 0.8);
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+    width: 50000 px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+.popup button{
+    margin-top: 20px;
+    padding: 10px 20px;
+    border: none;
+    background: rgba(78, 150, 209, 0.8);
+    color: rgba(9, 122, 209, 1);
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 13 px;
+} 
+.popup button:hover{
+    background: rgba(67, 209, 206, 1)
+}
+.container {
+    height: 30px;
+    background-color: #CCC;
+    position: relative;
+}
+.container .progress-bar{
+    position: absolute;
+    height: 100%;
+    background-color: #FF3B30;
+    color: white;
+    font-weight: 700;
+    border-radius: 4px;
+    transition: width 0.12s linear;
+
+}
+#play-animation{
+    animation: progress-animation 5s linear forwards;
+}
+
+@keyframes progress-animation{
+    0% {width: 0%;}
+    100% {width: 100%;}
+}
+
+.progress-bar.complete{
+    background-color: #2ecc71;
+}
+/* This will be the style sheet for the CS 370 project */

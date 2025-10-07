@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang = "en">
+    <head>
+        <meta charset = "UTF-8">
+        <title>Simulation Results</title>
+        <link rel="stylesheet" href="StyleSheet.css">
+    </head>
+    <body>
+        <h1 style= "font-size: 55px; text-align: left;"><strong>Simulation Results</strong>
+        </h1>
+        <p style="text-align: center; font-size: 20px; margin-top: 20%;">
+            This is where the results of the simulation will be displayed.
+            The results will include a summary of the battle, including the winner, key moments, and statistics.
+            The results will be presented in a visually appealing format, with graphics and animations to enhance the user experience.
+        </p>
+        <button id = "nextLevelbtn">Proceed to Next Level</button>
+        <button id = "restartbtn">Restart Process</button>
+        <div id = "nextLevelConfirm" class="overlay">
+            <div class="popup">
+                <h2>Are you ready to proceed to the next level?</h2>
+                <p>Your same character will fight the next opponents</p>
+                <button onclick="document.getElementById('nextLevelConfirm').style.display='none';">Cancel</button>
+                <button id="confirmNextLevel">Yes, Proceed</button>
+            </div>
+        </div>
+        <div id="restartConfirm" class="overlay">
+            <div class="popup">
+                <h2>Are you sure you want to restart the character creation process?</h2>
+                <p>All current progress will be lost.</p>
+                <button onclick="document.getElementById('restartConfirm').style.display='none';">Cancel</button>
+                <button id="confirmRestart">Yes, Restart</button>
+            </div>
+        </div>
+        <script>
+            document.getElementById('nextLevelbtn').addEventListener('click', function(){
+                document.getElementById('nextLevelConfirm').style.display = 'flex';
+            });
+            document.getElementById('confirmNextLevel').addEventListener('click', function(){
+                window.location.href = 'Loading.html';
+            });
+            document.getElementById('restartbtn').addEventListener('click', function(){
+                document.getElementById('restartConfirm').style.display = 'flex';
+            });
+            document.getElementById('confirmRestart').addEventListener('click', function(){
+                try{
+                    sessionStorage.setItem('suppressDisclaimerOnReturn', '1');
+                }catch(e){
+                }
+                window.location.href = 'CharacterSubmission.html';
+            });
+        </script>
+    </body>
+</html>

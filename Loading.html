@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang = "en">
+    <head>
+        <meta charset = "UTF-8">
+        <title>Loading</title>
+        <link rel="stylesheet" href="StyleSheet.css">
+        <script type ="text/javascript">
+            function upload(){
+                const progressBar = document.getElementById('progressBar');
+                const goNextBtn = document.getElementById('goNextBtn');
+                const generateBtn = document.getElementById('generateBtn');
+
+                goNextBtn.disabled = true;
+                generateBtn.disabled = true;
+                let progress = 0;
+                progressBar.style.width = '0%';
+                progressBar.textContent = '0%';
+                const interval = setInterval(() => {
+                    progress += Math.floor(Math.random() * 6) + 1;
+                    if(progress > 100) progress = 100;
+                    progressBar.style.width = progress + '%';
+                    progressBar.textContent = progress + '%';
+
+                    if(progress >= 100){
+                        clearInterval(interval);
+                        goNextBtn.disabled = false;
+                        generateBtn.disabled = true;
+                        progressBar.classList.add('complete');
+                    }
+                }, 75);
+            }
+        </script>
+    </head>
+    <body>
+        <h1 style= "font-size: 55px; text-align: center; margin-top: 20%;"><strong>Loading</strong>
+        </h1>
+        <div class = "container" style="width:70%; margin: 2rem auto; background: rgba(255,255,255,0.1); border-radius:6px; padding:6px;">
+            <div id="progressBar" class="progress-bar" style="width:0%; height:28px; line-height:28px; text-align:center;">0%</div>
+        </div> 
+        <div style="text-align:center; gap: 1rem; display:flex; justify-content:center;">
+            <button id="generateBtn" onclick="upload()">Generate Simulation</button>
+            <button id="goNextBtn" disabled>Go Next</button>
+        </div>
+        <div id="goNextConfirm" class="overlay">
+            <div class="popup">
+                <h2>Are you ready to proceed to the simulation?</h2>
+                <p>There is no other option</p>
+                <button id="confirmGoNext">Yes, Proceed</button>
+            </div>
+        </div>
+
+        <script>
+            document.getElementById('goNextBtn').addEventListener('click', function(){
+                document.getElementById('goNextConfirm').style.display = 'flex';
+            });
+            document.getElementById('confirmGoNext').addEventListener('click', function(){
+                window.location.href = 'Simulation.html';
+            });
+        </script>
+    </body>
+</html>
