@@ -4,32 +4,31 @@
         <meta charset="UTF-8">
         <title>CharacterSubmission</title>
         <link rel="stylesheet" href="StyleSheet.css">
-        <link rel="icon" type = "image/x-icon" href="/images/Favicon (Black).png">
+        <link rel="icon" type = "image/x-icon" href="https://raw.githubusercontent.com/oneslinky/ProjectCricket/main/Favicon%20(Black).png">
+        <!--<link rel="icon" tpye = "image/x-icon" href="/images/Favicon (Black).png"> for local use -->
     </head>
-    <body>
-        <h1>
-           <strong>Welcome to Multiverse All Star Battlefront</strong> 
-        </h1>
+    <body class="submission-page" style = "background-image:url('https://raw.githubusercontent.com/oneslinky/ProjectCricket/main/Dark Background.png');background-size: cover; background-repeat: no-repeat;">
         <div id = "Intro/Disclaimer" class="overlay"> 
             <div class="popup">
                 <h2>Disclaimer and Participation Agreement</h2>
                 <p>By clicking "I Agree", you consent to participate in the Multiverse All Star Battlefront game. 
-                    You acknowledge that you have read and understood the <a href = "*/insert rules and guidelines link*/" target ="_blank">rules and guidelines</a> of the game. 
-                    You agree to abide by the <a href = "*/insert the terms and conditions link*/" target ="_blank">terms and conditions</a> set forth by the game developers. 
+                    You acknowledge that you have read and understood the <a href = 'RulesAndguidelines.html' target ="_blank">rules and guidelines</a> of the game. 
+                    You agree to abide by the <a href = 'TermsAndConditions.html' target ="_blank">terms and conditions</a> set forth by the game developers. 
                     If you do not agree to these terms, please close the window and exit the game.
                 </p>
                 <button id="agreeBtn">I Agree</button>
             </div>
         </div>
 
+
         <div id = "timer">0:10</div>
-        <p>
+        <p style = "color: ghostwhite;">
             You have 5 minutes to describe your character. 
             Please be as descriptive as possible. You can include their stats, 
             fighting style, memorable strengths and weaknesses, and any other relevant information.
             Once the timer hits zero, you will be prompted to submit your description or reset if you aren't pleased with your description.
         </p>
-        <textarea id="description" rows="25" cols="175" placeholder="Type your description here..."></textarea>
+        <textarea id="description" rows="25" cols="165" placeholder="Type your description here..."></textarea>
         <br>
         <button id="submitBtn">Submit</button> 
         <button id="resetBtn">Reset</button>   
@@ -39,7 +38,7 @@
                 <p>Your time is up. Please click the submit button if you are satisfied 
                     with your description or click reset to try again.
                 </p>
-                <button onclick="document.getElementById('popupOverlay').style.display='none';">Close</button>
+                <button onclick="closeTimeUpPopup();">Close</button>
             </div>
          </div>
          <div id = "missingdesc" class = "overlay">
@@ -70,30 +69,43 @@
             let timerRunning = false;
             let countdown;
             resetBtn.disabled = true;
-
             descriptionBox.addEventListener('input', startTimer);
+            descriptionBox.addEventListener('keydown', startTimer);
+            descriptionBox.addEventListener('paste', startTimer);
+            function updateTimerDisplay(){
+                const minutes = Math.floor(timeleft / 60);
+                const seconds = timeleft % 60;
+                const secStr = seconds < 10 ? '0' + seconds : seconds;
+                timerDisply.textContent = `${minutes}:${secStr}`;
+            }
 
             function startTimer(){
                 if(timerRunning){
                     return;
             }
+            if(timerRunning) return;
             timerRunning = true;
-            descriptionBox.diabled = false;
-            let countdown = setInterval(()=>{
-                let minutes = Math.floor(timeleft / 60);
-                let seconds = timeleft % 60;
-                seconds = seconds < 10 ? '0' + seconds : seconds;
-                timerDisply.textContent = `${minutes}:${seconds}`;
+            setTimerColor('#ffffff');
+            descriptionBox.disabled = false;
+            if(countdown) clearInterval(countdown);
+            updateTimerDisplay();
+            countdown = setInterval(()=>{
                 timeleft--;
-
                 if(timeleft <= 0){
                     timeleft = 0;
-                    timerDisply.textContent = "0:00";
+                    updateTimerDisplay();
                     clearInterval(countdown);
                     showPopup();
                     descriptionBox.disabled = true;
+                    setTimerColor('#FF3B30');
+                    const tEl = document.getElementById('timer');
+                    if(tEl){
+                        tEl.classList.add('blink');
+                    }
                     timerRunning = false;
                     resetBtn.disabled = false;
+                } else {
+                    updateTimerDisplay();
                 }
             }, 1000);
         }
@@ -107,6 +119,22 @@
             sessionStorage.setItem('disclaimerAccepted', '1');
             document.getElementById('Intro/Disclaimer').style.display = 'none';
         });
+
+        function setTimerColor(color){
+            const timerEl = document.getElementById('timer');
+            if(timerEl) timerEl.style.color = color;
+        }
+
+        function closeTimeUpPopup(){
+            const overlay = document.getElementById('popupOverlay');
+            if(overlay) overlay.style.display = 'none';
+            const tEl = document.getElementById('timer');
+            if(tEl) tEl.classList.remove('blink');
+            if(window._timerBlinkTimeout){
+                clearTimeout(window._timerBlinkTimeout);
+                window._timerBlinkTimeout = null;
+            }
+        }
 
             submitBtn.addEventListener('click', function(){
             let description = descriptionBox.value;
@@ -126,6 +154,15 @@
             timerDisply.textContent = "0:10";
             descriptionBox.value = '';
             descriptionBox.disabled = false;
+            setTimerColor('#2ecc71');
+            const tEl = document.getElementById('timer');
+            if(tEl){
+                tEl.classList.remove('blink');
+            }
+            if(window._timerBlinkTimeout){
+                clearTimeout(window._timerBlinkTimeout);
+                window._timerBlinkTimeout = null;
+            }
             timerRunning = false;
         })
         </script>

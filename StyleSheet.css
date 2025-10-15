@@ -1,11 +1,37 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Tektur:wght@400;700;900&display=swap');
 
+:root{
+    /* Default: no global offset. Use page-specific classes to move content when needed. */
+    --page-top-offset: 0px;
+}
+
+/* Page-specific helper class: apply this to <body> on the page(s) that need content pushed down */
+.submission-page{
+    --page-top-offset: 200px;
+}
+
+
 body{
     background-color: #e7d1ff;
     font-family: 'Tektur', 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    /* move page content down without affecting fixed overlays */
+    padding-top: var(--page-top-offset);
 }
+
 #timer {font-size: 48px; font-weight: bold;}
+/* Center the timer horizontally and give it some top margin to separate from header/background */
+#timer{
+    margin: 0 auto 1.5rem auto;
+    text-align: center;
+    display: block;
+    color:#2ecc71;
+    font-size: 48px;
+    max-width: 320px;
+    background: rgba(255,255,255,0.06);
+    padding: 0.25rem 0.75rem;
+    border-radius: 6px;
+}
 .overlay {
     display: none;
     position: fixed;
@@ -62,5 +88,15 @@ body{
 
 .progress-bar.complete{
     background-color: #2ecc71;
+}
+/* blink helper for timer when it reaches zero */
+.blink{
+    animation: blink-opacity 0.6s step-start infinite;
+}
+
+@keyframes blink-opacity{
+    0% { opacity: 1; }
+    50% { opacity: 0.15; }
+    100% { opacity: 1; }
 }
 /* This will be the style sheet for the CS 370 project */
