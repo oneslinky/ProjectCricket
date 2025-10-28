@@ -1,12 +1,74 @@
 <!DOCTYPE html>
-<html lang = "en">
+<html lang="en">
     <head>
-        <meta charset = "UTF-8">
+        <meta charset="UTF-8">
         <title>Loading</title>
         <link rel="stylesheet" href="StyleSheet.css">
-        <link rel="icon" type = "image/x-icon" href="https://raw.githubusercontent.com/oneslinky/ProjectCricket/main/Favicon%20(Black).png">
-        <!--<link rel="icon" tpye = "image/x-icon" href="/images/Favicon (Black).png"> for local use -->
-        <script type ="text/javascript">
+        <link rel="icon" type="image/x-icon" href="https://raw.github.com/oneslinky/ProjectCricket/main/Favicon%20Black%20Background%20Square.png">
+
+        <style>
+            /* Base layout and background behavior */
+            html, body {
+                height: 100%;
+                min-height: 100vh;
+                margin: 0;
+                padding: 0;
+                background-size: cover;
+                background-position: center center;
+                background-repeat: no-repeat;
+                background-attachment: scroll;
+            }
+
+            /* Top header that holds loading UI */
+            .top-header{
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                height: 120px;
+                background: #000; /* solid black header */
+                color: #fff;
+                display:flex;
+                align-items:center;
+                justify-content:center;
+                z-index: 1000;
+                box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+            }
+
+            .top-header .inner{
+                width: 100%;
+                max-width: 1200px;
+                padding: 0 1rem;
+                display:flex;
+                align-items:center;
+                justify-content:space-between;
+                gap:1rem;
+            }
+
+            .top-header h1{ margin: 0; font-size: 28px; letter-spacing: 1px; }
+
+            .header-controls{ display:flex; align-items:center; gap:1rem; }
+
+            .progress-track{ width:320px; background: rgba(255,255,255,0.08); border-radius:8px; padding:6px; }
+            .progress-bar{ width:0%; height:30px; line-height:30px; text-align:center; border-radius:6px; background: linear-gradient(90deg, rgba(255,255,255,0.15), rgba(255,255,255,0.05)); color:#fff; font-weight:600; }
+
+            /* Larger buttons in header */
+            .top-header button{ padding:10px 18px; font-size:16px; border-radius:6px; border:none; cursor:pointer; }
+            .top-header button:disabled{ opacity:0.5; cursor:not-allowed; }
+
+            /* Keep page content below header so background shows under header crop */
+            body{ padding-top: 120px; }
+
+            /* Slight responsive adjustments */
+            @media (max-width:720px){
+                .progress-track{ width:180px; }
+                .top-header{ height:110px; }
+                body{ padding-top: 110px; }
+                .top-header h1{ font-size:20px; }
+            }
+        </style>
+
+        <script>
             function upload(){
                 const progressBar = document.getElementById('progressBar');
                 const goNextBtn = document.getElementById('goNextBtn');
@@ -32,19 +94,73 @@
                 }, 75);
             }
         </script>
+
+        <script>
+        (function(){
+            // Random background selector (keeps behavior but optional)
+            const backgrounds = [
+                'https://raw.github.com/oneslinky/ProjectCricket/76f773d4979e9031c0e8b017f510a429897650b2/assests/loading%20background/Alleyway%20(Noir).png',
+                'https://raw.github.com/oneslinky/ProjectCricket/76f773d4979e9031c0e8b017f510a429897650b2/assests/loading%20background/Cityscape.png',
+                'https://raw.github.com/oneslinky/ProjectCricket/76f773d4979e9031c0e8b017f510a429897650b2/assests/loading%20background/Rooftop%20(Comic).png'
+            ];
+
+            function pickRandom(arr){ return arr[Math.floor(Math.random() * arr.length)]; }
+
+            function setBackground(src){
+                const img = new Image();
+                img.onload = function(){
+                    const css = `url("${src}")`;
+                    document.documentElement.style.backgroundImage = css;
+                    document.body.style.backgroundImage = css;
+                };
+                img.onerror = function(){
+                    const idx = backgrounds.indexOf(src);
+                    if(idx > -1) backgrounds.splice(idx,1);
+                    if(backgrounds.length) setBackground(pickRandom(backgrounds));
+                    else {
+                        const grad = 'linear-gradient(120deg,#0f1724,#0b3a53)';
+                        document.documentElement.style.backgroundImage = grad;
+                        document.body.style.backgroundImage = grad;
+                    }
+                };
+                img.src = src;
+            }
+
+            document.addEventListener('DOMContentLoaded', function(){
+                if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+                    document.documentElement.style.transition = 'none';
+                }
+                setBackground(pickRandom(backgrounds));
+            });
+        })();
+        </script>
     </head>
     <body>
-        <h1 style= "font-size: 55px; text-align: center; margin-top: 20%;"><strong>Loading</strong>
-        </h1>
-        <div class = "container" style="width:70%; margin: 2rem auto; background: rgba(255,255,255,0.1); border-radius:6px; padding:6px;">
-            <div id="progressBar" class="progress-bar" style="width:0%; height:28px; line-height:28px; text-align:center;">0%</div>
-        </div> 
-        <div style="text-align:center; gap: 1rem; display:flex; justify-content:center;">
-            <button id="generateBtn" onclick="upload()">Generate Simulation</button>
-            <button id="goNextBtn" disabled>Go Next</button>
-        </div>
-        <div id="goNextConfirm" class="overlay">
-            <div class="popup">
+        <!-- Top black header with loading UI -->
+        <header class="top-header">
+            <div class="inner">
+                <h1><strong>Loading</strong></h1>
+                <div class="header-controls">
+                    <div class="progress-track">
+                        <div id="progressBar" class="progress-bar">0%</div>
+                    </div>
+                    <div class="header-buttons">
+                        <button id="generateBtn" onclick="upload()">Generate Simulation</button>
+                        <button id="goNextBtn" disabled>Go Next</button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main content sits below the header so the background image is cropped under the header area -->
+        <main>
+            <div style="text-align:center; margin-top: 3rem;">
+                <!-- optional content below header -->
+            </div>
+        </main>
+
+        <div id="goNextConfirm" class="overlay" style="display:none; position:fixed; inset:0; align-items:center; justify-content:center;">
+            <div class="popup" style="background:#fff; padding:1.5rem; border-radius:8px; max-width:400px; text-align:center;">
                 <h2>Are you ready to proceed to the simulation?</h2>
                 <p>There is no other option</p>
                 <button id="confirmGoNext">Yes, Proceed</button>
