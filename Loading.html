@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <title>Loading</title>
         <link rel="stylesheet" href="StyleSheet.css">
-        <link rel="icon" type="image/x-icon" href="https://raw.github.com/oneslinky/ProjectCricket/main/Favicon%20Black%20Background%20Square.png">
+        <link rel="icon" type="image/x-icon" href="https://raw.github.com/oneslinky/ProjectCricket/76f773d4979e9031c0e8b017f510a429897650b2/assests/favicon/Favicon%20Black%20Background%20Square.png">
 
         <style>
             /* Base layout and background behavior */
@@ -50,7 +50,19 @@
             .header-controls{ display:flex; align-items:center; gap:1rem; }
 
             .progress-track{ width:320px; background: rgba(255,255,255,0.08); border-radius:8px; padding:6px; }
-            .progress-bar{ width:0%; height:30px; line-height:30px; text-align:center; border-radius:6px; background: linear-gradient(90deg, rgba(255,255,255,0.15), rgba(255,255,255,0.05)); color:#fff; font-weight:600; }
+            /* Blue while filling, turns green when .complete is added */
+            .progress-bar{
+                width:0%;
+                height:30px;
+                line-height:30px;
+                text-align:center;
+                border-radius:6px;
+                background: linear-gradient(90deg,#3B82F6,#1E40AF); /* blue gradient */
+                color:#fff;
+                font-weight:600;
+                transition: width 0.12s linear, background-color 0.2s linear;
+            }
+            .progress-bar.complete{ background: linear-gradient(90deg,#16A34A,#059669); }
 
             /* Larger buttons in header */
             .top-header button{ padding:10px 18px; font-size:16px; border-radius:6px; border:none; cursor:pointer; }
@@ -135,7 +147,7 @@
         })();
         </script>
     </head>
-    <body>
+    <body class="bg-contain">
         <!-- Top black header with loading UI -->
         <header class="top-header">
             <div class="inner">

@@ -7,7 +7,7 @@
         <link rel="icon" type = "image/x-icon" href="https://raw.github.com/oneslinky/ProjectCricket/76f773d4979e9031c0e8b017f510a429897650b2/assests/favicon/Favicon%20Black%20Background%20Square.png">
         <!--<link rel="icon" tpye = "image/x-icon" href="/images/Favicon (Black).png"> for local use -->
     </head>
-    <body>
+    <body style = "background-image:url('https://raw.github.com/oneslinky/ProjectCricket/8730df2a31fbdbc0f0a4c60121ff8c76fc12ef6e/assests/Stats%20Background.png');background-size: cover; background-repeat: no-repeat;">
     
         <h1>
            <strong>Character Overview</strong> 
@@ -20,20 +20,6 @@
         </h2>
         <p>
             This section will provide a brief overview of the character, including their name, age, and background story.
-        </p>
-        <h2><strong>Character Stats</strong></h2>
-        <p>
-            This section will display the character's stats, such as Health Points, Mana Points, Attack Power, Defense, Adiligty, and Luck.
-        </p>
-        <h2><strong>Character Abilities</strong></h2>
-        <p>
-            This section will list the character's abilities, including their basic, special, and Ultimate ability. 
-            Each ability will have a brief description and what it does
-        </p>
-        <h2><strong>Character Apperance</strong></h2>
-        <p>
-            This section will provide a visual representation of the character, including their physical appearance, clothing, and any unique features.
-            This image of the character apperance will be generated using an AI image generator based on the description provided during character submission.
         </p>
         <div id="confirmbackPopup" class = "overlay">
             <div class = "popup">
@@ -51,8 +37,29 @@
                 <button onclick="window.location.href='Loading.html';">Confirm</button>
             </div>
         </div>
-        <button id = "backButton">Return to Character Submission Page</button>
-        <button id = "submitBtn">Confirm character </button>
+        <aside class="panel panel--top-right" aria-label="Character stats and image">
+            <div style="display:flex; gap:12px; align-items:flex-start;">
+                   <div class="panel stats">
+                    <img class="stat-icon" src="https://raw.github.com/oneslinky/ProjectCricket/8730df2a31fbdbc0f0a4c60121ff8c76fc12ef6e/assests/Stat%20Icons/HP.png" alt="Health">
+                    <img class="stat-icon" src="https://raw.github.com/oneslinky/ProjectCricket/8730df2a31fbdbc0f0a4c60121ff8c76fc12ef6e/assests/Stat%20Icons/MP.png" alt="Mana">
+                    <img class="stat-icon" src="https://raw.github.com/oneslinky/ProjectCricket/8730df2a31fbdbc0f0a4c60121ff8c76fc12ef6e/assests/Stat%20Icons/ATK.png" alt="Attack">
+                    <img class="stat-icon" src="https://raw.github.com/oneslinky/ProjectCricket/8730df2a31fbdbc0f0a4c60121ff8c76fc12ef6e/assests/Stat%20Icons/DEF.png" alt="Defense">
+                    <img class="stat-icon" src="https://raw.github.com/oneslinky/ProjectCricket/8730df2a31fbdbc0f0a4c60121ff8c76fc12ef6e/assests/Stat%20Icons/AGI.png" alt="Speed">
+                    <img class="stat-icon" src="https://raw.github.com/oneslinky/ProjectCricket/8730df2a31fbdbc0f0a4c60121ff8c76fc12ef6e/assests/Stat%20Icons/LUK.png" alt="Luck">
+                </div>
+            </div>
+        </aside>
+        
+        <section class="panel skills panel--bottom-center" aria-label="Skills">
+            <div style="width:98%; text-align:center;">
+                <div class="panel-title">SKILLS</div>
+                <div class="single-line" style="color:#093049; opacity:0.95; margin-top:6px;">Add skill descriptions.</div>
+                <div class="panel-buttons" style="margin-top:12px; display:flex; gap:12px; justify-content:center;">
+                    <button id="backButton">Return to Character Submission Page</button>
+                    <button id="submitBtn">Confirm character</button>
+                </div>
+            </div>
+        </section>
         <script>
             function showbackpopup(){
                 document.getElementById('confirmbackPopup').style.display='flex';
