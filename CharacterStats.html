@@ -7,20 +7,8 @@
         <link rel="icon" type = "image/x-icon" href="https://raw.github.com/oneslinky/ProjectCricket/76f773d4979e9031c0e8b017f510a429897650b2/assests/favicon/Favicon%20Black%20Background%20Square.png">
         <!--<link rel="icon" tpye = "image/x-icon" href="/images/Favicon (Black).png"> for local use -->
     </head>
-    <body style = "background-image:url('https://raw.github.com/oneslinky/ProjectCricket/8730df2a31fbdbc0f0a4c60121ff8c76fc12ef6e/assests/Stats%20Background.png');background-size: cover; background-repeat: no-repeat;">
-    
-        <h1>
-           <strong>Character Overview</strong> 
-        </h1>
-        <p>
-            This is where character stats will be displayed after submission.
-        </p>
-        <h2>
-            <strong>Character Story Overview</strong>
-        </h2>
-        <p>
-            This section will provide a brief overview of the character, including their name, age, and background story.
-        </p>
+    <body>
+        <div class="panel-label stats">STATS</div>
         <div id="confirmbackPopup" class = "overlay">
             <div class = "popup">
                 <h2>Confirm Navigation</h2>
@@ -37,27 +25,53 @@
                 <button onclick="window.location.href='Loading.html';">Confirm</button>
             </div>
         </div>
-        <aside class="panel panel--top-right" aria-label="Character stats and image">
-            <div style="display:flex; gap:12px; align-items:flex-start;">
-                   <div class="panel stats">
-                    <img class="stat-icon" src="https://raw.github.com/oneslinky/ProjectCricket/8730df2a31fbdbc0f0a4c60121ff8c76fc12ef6e/assests/Stat%20Icons/HP.png" alt="Health">
-                    <img class="stat-icon" src="https://raw.github.com/oneslinky/ProjectCricket/8730df2a31fbdbc0f0a4c60121ff8c76fc12ef6e/assests/Stat%20Icons/MP.png" alt="Mana">
-                    <img class="stat-icon" src="https://raw.github.com/oneslinky/ProjectCricket/8730df2a31fbdbc0f0a4c60121ff8c76fc12ef6e/assests/Stat%20Icons/ATK.png" alt="Attack">
-                    <img class="stat-icon" src="https://raw.github.com/oneslinky/ProjectCricket/8730df2a31fbdbc0f0a4c60121ff8c76fc12ef6e/assests/Stat%20Icons/DEF.png" alt="Defense">
-                    <img class="stat-icon" src="https://raw.github.com/oneslinky/ProjectCricket/8730df2a31fbdbc0f0a4c60121ff8c76fc12ef6e/assests/Stat%20Icons/AGI.png" alt="Speed">
-                    <img class="stat-icon" src="https://raw.github.com/oneslinky/ProjectCricket/8730df2a31fbdbc0f0a4c60121ff8c76fc12ef6e/assests/Stat%20Icons/LUK.png" alt="Luck">
+        <aside class="panel stats panel--top-right" aria-label="Character stats">
+            <div class="stat-container">
+                <img class="stat-icon" src="https://raw.github.com/oneslinky/ProjectCricket/8730df2a31fbdbc0f0a4c60121ff8c76fc12ef6e/assests/Stat%20Icons/HP.png" alt="Health">
+                <div class="stat-bar-container">
+                    <div class="stat-bar hp" style="width: 0%"></div>
+                </div>
+            </div>
+            <div class="stat-container">
+                <img class="stat-icon" src="https://raw.github.com/oneslinky/ProjectCricket/8730df2a31fbdbc0f0a4c60121ff8c76fc12ef6e/assests/Stat%20Icons/MP.png" alt="Mana">
+                <div class="stat-bar-container">
+                    <div class="stat-bar mp" style="width: 0%"></div>
+                </div>
+            </div>
+            <div class="stat-container">
+                <img class="stat-icon" src="https://raw.github.com/oneslinky/ProjectCricket/8730df2a31fbdbc0f0a4c60121ff8c76fc12ef6e/assests/Stat%20Icons/ATK.png" alt="Attack">
+                <div class="stat-bar-container">
+                    <div class="stat-bar atk" style="width: 0%"></div>
+                </div>
+            </div>
+            <div class="stat-container">
+                <img class="stat-icon" src="https://raw.github.com/oneslinky/ProjectCricket/8730df2a31fbdbc0f0a4c60121ff8c76fc12ef6e/assests/Stat%20Icons/DEF.png" alt="Defense">
+                <div class="stat-bar-container">
+                    <div class="stat-bar def" style="width: 0%"></div>
+                </div>
+            </div>
+            <div class="stat-container">
+                <img class="stat-icon" src="https://raw.github.com/oneslinky/ProjectCricket/8730df2a31fbdbc0f0a4c60121ff8c76fc12ef6e/assests/Stat%20Icons/AGI.png" alt="Speed">
+                <div class="stat-bar-container">
+                    <div class="stat-bar agi" style="width: 0%"></div>
+                </div>
+            </div>
+            <div class="stat-container">
+                <img class="stat-icon" src="https://raw.github.com/oneslinky/ProjectCricket/8730df2a31fbdbc0f0a4c60121ff8c76fc12ef6e/assests/Stat%20Icons/LUK.png" alt="Luck">
+                <div class="stat-bar-container">
+                    <div class="stat-bar luk" style="width: 0%"></div>
                 </div>
             </div>
         </aside>
         
+        <div class="panel-label skills">SKILLS</div>
         <section class="panel skills panel--bottom-center" aria-label="Skills">
-            <div style="width:98%; text-align:center;">
-                <div class="panel-title">SKILLS</div>
-                <div class="single-line" style="color:#093049; opacity:0.95; margin-top:6px;">Add skill descriptions.</div>
-                <div class="panel-buttons" style="margin-top:12px; display:flex; gap:12px; justify-content:center;">
-                    <button id="backButton">Return to Character Submission Page</button>
-                    <button id="submitBtn">Confirm character</button>
-                </div>
+            <div class="skills-list" id="skillsList">
+                <!-- Skills will be injected here by JavaScript -->
+            </div>
+            <div class="panel-buttons">
+                <button id="backButton">Return to Character Submission Page</button>
+                <button id="submitBtn">Confirm character</button>
             </div>
         </section>
         <script>
@@ -79,6 +93,78 @@
             });
             document.getElementById("submitBtn").onclick = function () {
                 showsubmitpopup();
+            };
+
+            // Animate the stat bars when the page loads
+            window.onload = function() {
+                // Helper: render skill cards into the skills list
+                function renderSkills(skills) {
+                    const list = document.getElementById('skillsList');
+                    list.innerHTML = '';
+                    if (!skills || skills.length === 0) {
+                        list.innerHTML = '<p style="text-align:center;color:#fff;">No skills available</p>';
+                        return;
+                    }
+                    skills.forEach(s => {
+                        const item = document.createElement('div');
+                        item.className = 'skill-item';
+                        const title = document.createElement('h3');
+                        title.textContent = s.name || 'Unknown Skill';
+                        const detail = document.createElement('p');
+                        let html = '';
+                        if (s.type) html += `Type: ${s.type}<br>`;
+                        if (s.power !== undefined) html += `Power: ${s.power}<br>`;
+                        if (s.mana_cost !== undefined) html += `Mana Cost: ${s.mana_cost}<br>`;
+                        if (s.duration !== undefined) html += `Duration: ${s.duration} turns<br>`;
+                        if (s.stat_target) html += `Target: ${s.stat_target}<br>`;
+                        detail.innerHTML = html;
+                        item.appendChild(title);
+                        item.appendChild(detail);
+                        list.appendChild(item);
+                    });
+                }
+
+                // Set character data (stats and skills). stats = raw values; maxStat optional
+                function setCharacterData(character) {
+                    const stats = character.stats || {};
+                    const maxStat = character.maxStat || Math.max(...Object.values(stats).filter(v=>typeof v==='number'), 100);
+
+                    // Animate each stat bar based on computed percentage
+                    Object.keys(stats).forEach(statKey => {
+                        const value = stats[statKey];
+                        const percent = Math.round((value / maxStat) * 100);
+                        const bar = document.querySelector(`.stat-bar.${statKey}`);
+                        if (bar) {
+                            // small stagger for nicer visual
+                            setTimeout(() => { bar.style.width = percent + '%'; }, 150);
+                        }
+                    });
+
+                    // Render skills
+                    renderSkills(character.skills || []);
+                }
+
+                // Default example: Superman (will populate if no external data provided)
+                const defaultCharacter = {
+                    name: 'Superman',
+                    stats: {
+                        hp: 120,
+                        mp: 50,
+                        atk: 25,
+                        def: 20,
+                        agi: 10,
+                        luk: 12
+                    },
+                    maxStat: 120,
+                    skills: [
+                        { name: 'Heat Vision', type: 'Damage', power: 30, mana_cost: 10 },
+                        { name: 'Solar Recharge', type: 'Heal', power: 25, mana_cost: 8 },
+                        { name: 'Kryptonian Surge', type: 'Buff', power: 10, duration: 2, mana_cost: 6, stat_target: 'ATK' }
+                    ]
+                };
+
+                // On load populate with defaultCharacter (or you can call setCharacterData with other data)
+                setCharacterData(defaultCharacter);
             };
         </script>
     </body>
