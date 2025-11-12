@@ -1,18 +1,98 @@
 
+html, body {
+    height: 100%;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+}
+
+.top-header{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 120px;
+    background: #000;
+    color: #fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    z-index: 1000;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+}
+
+.top-header .inner{
+    width: 100%;
+    max-width: 1200px;
+    padding: 0 1rem;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:1rem;
+}
+
+.top-header h1{ margin: 0; font-size: 28px; letter-spacing: 1px; }
+
+.header-controls{ display:flex; align-items:center; gap:1rem; }
+
+.progress-track{ width:320px; background: rgba(255,255,255,0.08); border-radius:8px; padding:6px; }
+.progress-bar{
+    width:0%;
+    height:30px;
+    line-height:30px;
+    text-align:center;
+    border-radius:6px;
+    background: linear-gradient(90deg,#3B82F6,#1E40AF);
+    color:#fff;
+    font-weight:600;
+    transition: width 0.12s linear, background-color 0.2s linear;
+}
+.progress-bar.complete{ background: linear-gradient(90deg,#16A34A,#059669); }
+
+.top-header button{ padding:10px 18px; font-size:16px; border-radius:6px; border:none; cursor:pointer; }
+.top-header button:disabled{ opacity:0.5; cursor:not-allowed; }
+
+body.bg-contain, body.loading-page {
+    padding-top: 120px;
+}
+
+@media (max-width:720px){
+    .progress-track{ width:180px; }
+    .top-header{ height:110px; }
+    body.bg-contain, body.loading-page { padding-top: 110px; }
+    .top-header h1{ font-size:20px; }
+}
+
 @import url('https://fonts.googleapis.com/css2?family=Tektur:wght@400;700;900&display=swap');
 
 :root{
-    /* Default: no global offset. Use page-specific classes to move content when needed. */
+
     --page-top-offset: 0px;
 }
 
-/* Page-specific helper class: apply this to <body> on the page(s) that need content pushed down */
+
 .submission-page{
     --page-top-offset: 200px;
-    padding-top: 140px;  /* Add padding to push content down */
+    padding-top: 140px;  
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+.rules-and-guidelines-page{
+    --page-top-offset: 140px;
+    padding-top: 140px;
+    align-items: left;
+    padding-left: 50px;
+}
+.terms-and-conditions-page{
+    --page-top-offset: 200px;
+    padding-top: 250px;
+    align-items: left;
+    padding-left: 50px;
 }
 
 .bg-contain, .bg-contain html, .bg-contain body {
@@ -30,6 +110,10 @@
     min-height: 100vh;
 }
 
+.simulation-page{
+    background-image: url('')
+}
+
 body{
     background-image: url('https://raw.github.com/oneslinky/ProjectCricket/8730df2a31fbdbc0f0a4c60121ff8c76fc12ef6e/assests/Stats%20Background.png');
     background-size: cover;
@@ -42,17 +126,16 @@ body{
 }
 
 #timer {font-size: 48px; font-weight: bold;}
-/* Center the timer horizontally and give it some top margin to separate from header/background */
 #timer{
-    margin: 60px auto 1rem auto;  /* Added top margin */
+    margin: 60px auto 1rem auto; 
     text-align: center;
     display: block;
     color:#2ecc71;
     font-size: 48px;
     max-width: 320px;
     background: rgba(255,255,255,0.06);
-    padding: .5rem 1rem;  /* Increased padding even more */
-    border-radius: 4px;  /* Slightly larger border radius */
+    padding: .5rem 1rem;  
+    border-radius: 4px; 
 }
 .overlay {
     display: none;
@@ -111,7 +194,7 @@ body{
 .progress-bar.complete{
     background-color: #2ecc71;
 }
-/* blink helper for timer when it reaches zero */
+
 .blink{
     animation: blink-opacity 0.6s step-start infinite;
 }
@@ -123,19 +206,17 @@ body{
 }
 
 .panel {
-    background: #dbeffb;                     /* light blue fill */
-    border-radius: 28px;                     /* rounded corners like screenshot */
-    padding: 20px;                           /* inner spacing */
-    border: 1px solid rgba(0,0,0,0.06);      /* subtle edge */
-    box-shadow: 0 18px 40px rgba(3,10,27,0.18); /* soft shadow */
-    color: #042033;                          /* dark blue text for contrast */
-    /* Make sure content wraps and is visible rather than clipped */
+    background: #dbeffb;                    
+    border-radius: 28px;                   
+    padding: 20px;                         
+    border: 1px solid rgba(0,0,0,0.06);      
+    box-shadow: 0 18px 40px rgba(3,10,27,0.18); 
+    color: #042033;               
     overflow: visible;
     word-break: break-word;
     hyphens: auto;
 }
 
-/* Optional glass effect (modern browsers) */
 .panel.panel--glass {
     background: rgba(219,239,251,0.78);
     -webkit-backdrop-filter: blur(6px);
@@ -144,11 +225,11 @@ body{
 }
 
 .panel.stats {
-    width: 28vw;  /* One third of the viewport width */
-    height: 700px;    /* slightly reduced height to fit layout */
+    width: 28vw;  
+    height: 700px; 
     display: grid;
     grid-template-columns: 1fr 1fr;
-    align-items: start; /* Align items to start to prevent overlap */
+    align-items: start; 
     justify-items: center;
     box-sizing: border-box;
     background: rgba(255, 255, 255, 0.35);
@@ -156,8 +237,43 @@ body{
     border-radius: 40px;
     border: none;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-    min-width: 320px;  /* Minimum width to ensure readability */
-    max-width: 600px;  /* Maximum width for very large screens */
+    min-width: 320px;  
+    max-width: 600px;  
+}
+
+
+.panel.image-panel {
+    width: 800px;            
+    height: 360px;           
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+    box-sizing: border-box;
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(6px);
+    border-radius: 32px;
+    border: 1px dashed rgba(4,32,51,0.08);
+    color: #042033;
+}
+
+.image-placeholder {
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.03));
+    border: 2px dashed rgba(4,32,51,0.06);
+    box-sizing: border-box;
+    padding: 12px;
+}
+
+.image-placeholder-text{
+    color: rgba(4,32,51,0.55);
+    font-weight: 700;
+    text-align: center;
 }
 
 .stat-icon {
@@ -196,7 +312,7 @@ body{
 .stat-bar.agi { background: linear-gradient(90deg, #ffff46, #ffff70); }
 .stat-bar.luk { background: linear-gradient(90deg, #ff46ff, #ff70ff); }
 
-/* Long skills bar (wide panel) */
+
 .panel.skills {
     width: min(1000px, 94%);
     height: auto;
@@ -256,9 +372,11 @@ body{
     .panel.stats { width: 300px; gap: 12px; padding: 12px; min-height: 120px; }
     .panel.skills { height: 120px; padding: 12px; }
     .panel { border-radius: 18px; padding: 14px; }
+    .panel.image-panel { position: relative; width: 90%; max-width: 420px; margin: 12px auto; height: auto; }
+    .image-placeholder { height: 220px; }
 }
 
-/* Positioning helpers for common panel placements */
+
 .page-heading {
     position: fixed;
     top: 40px;
@@ -273,9 +391,9 @@ body{
 
 .panel--top-left{
     position: absolute;
-    top: 90px;  /* Moved down to make room for the label */
+    top: 50px;  
     left: 40px;
-    z-index: 00;
+    z-index: 0;
 }
 .panel-label {
     font-size: 38px;
@@ -289,8 +407,8 @@ body{
 
 .panel-label.stats {
     position: fixed;
-    top: 5px;  /* Positioned above the panel */
-    right: 300px;  /* Aligned with the right side */
+    top: 5px; 
+    right: 300px;  
     text-align: right;
     margin-bottom: 10px;
     z-index: 800;
@@ -298,7 +416,7 @@ body{
 
 .panel-label.skills {
     position: fixed;
-    bottom: 325px;  /* Increased to move label up, giving more space */
+    bottom: 325px; 
     left: 35%;
     transform: translateX(-50%);
     text-align: center;
@@ -316,11 +434,11 @@ body{
     position: fixed;
     left: 35%;
     transform: translateX(-50%);
-    bottom: -10px;   /* moved further down so it sits below the stats panel */
-    z-index: 699;  /* just below the label */
+    bottom: -10px; 
+    z-index: 699; 
 }
 
-/* Buttons inside the skills panel */
+
 .panel.skills .panel-buttons{ margin-top: 12px; display:flex; gap:12px; justify-content:center; }
 .panel.skills .panel-buttons button{ padding:10px 18px; font-size:16px; border-radius:8px; border:none; cursor:pointer; background:#0b66c3; color:#fff; }
 .panel.skills .panel-buttons button:disabled{ opacity:0.5; cursor:not-allowed; }

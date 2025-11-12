@@ -5,18 +5,22 @@
         <title>CharacterSubmission</title>
         <link rel="stylesheet" href="StyleSheet.css">
         <link rel="icon" type = "image/x-icon" href="https://raw.github.com/oneslinky/ProjectCricket/76f773d4979e9031c0e8b017f510a429897650b2/assests/favicon/Favicon%20Black%20Background%20Square.png">
-        <!--<link rel="icon" tpye = "image/x-icon" href="/images/Favicon (Black).png"> for local use -->
+
     </head>
     <body class="submission-page" style = "background-image:url('https://raw.github.com/oneslinky/ProjectCricket/76f773d4979e9031c0e8b017f510a429897650b2/assests/Website%20Background.png');background-size: cover; background-repeat: no-repeat;">
         <div id = "Intro/Disclaimer" class="overlay"> 
             <div class="popup">
                 <h2>Disclaimer and Participation Agreement</h2>
-                <p>By clicking "I Agree", you consent to participate in the Multiverse All Star Battlefront game. 
-                    You acknowledge that you have read and understood the <a href = 'RulesAndguidelines.html' target ="_blank">rules and guidelines</a> of the game. 
-                    You agree to abide by the <a href = 'TermsAndConditions.html' target ="_blank">terms and conditions</a> set forth by the game developers. 
-                    If you do not agree to these terms, please close the window and exit the game.
-                </p>
-                <button id="agreeBtn">I Agree</button>
+                                <p>By clicking "I Agree", you consent to participate in the Multiverse All Star Battlefront game. 
+                                        You acknowledge that you have read and understood the <a href = 'RulesAndguidelines.html' target ="_blank" id="rulesLink">rules and guidelines</a> of the game. 
+                                        You agree to abide by the <a href = 'TermsAndConditions.html' target ="_blank" id="termsLink">terms and conditions</a> set forth by the game developers. 
+                                        If you do not agree to these terms, please close the window and exit the game.
+                                </p>
+                                <div style="margin: 1em 0;">
+                                    <input type="checkbox" id="readCheckbox" disabled>
+                                    <label for="readCheckbox">I have read the Rules and Guidelines and Terms and Conditions</label>
+                                </div>
+                                <button id="agreeBtn" disabled>I Agree</button>
             </div>
         </div>
 
@@ -28,7 +32,7 @@
             fighting style, memorable strengths and weaknesses, and any other relevant information.
             Once the timer hits zero, you will be prompted to submit your description or reset if you aren't pleased with your description.
         </p>
-        <textarea id="description" rows="25" cols="165" placeholder="Type your description here..."></textarea>
+        <textarea id="description" rows="25" cols="165" placeholder="Type your description here... (max 500 characters)" maxlength = "500"></textarea>
         <br>
         <button id="submitBtn">Submit</button> 
         <button id="resetBtn">Reset</button>   
@@ -115,10 +119,43 @@
         function showDisclaimer(){
             document.getElementById('Intro/Disclaimer').style.display = 'flex';
         }
-        document.getElementById('agreeBtn').addEventListener('click', function(){
-            sessionStorage.setItem('disclaimerAccepted', '1');
-            document.getElementById('Intro/Disclaimer').style.display = 'none';
-        });
+
+
+                const agreeBtn = document.getElementById('agreeBtn');
+                const readCheckbox = document.getElementById('readCheckbox');
+                const rulesLink = document.getElementById('rulesLink');
+                const termsLink = document.getElementById('termsLink');
+
+        
+                function updateCheckboxState() {
+                    const rulesVisited = sessionStorage.getItem('rulesVisited') === '1';
+                    const termsVisited = sessionStorage.getItem('termsVisited') === '1';
+                    readCheckbox.disabled = !(rulesVisited && termsVisited);
+                }
+
+       
+                rulesLink.addEventListener('click', function() {
+                    sessionStorage.setItem('rulesVisited', '1');
+                    setTimeout(updateCheckboxState, 100); 
+                });
+                termsLink.addEventListener('click', function() {
+                    sessionStorage.setItem('termsVisited', '1');
+                    setTimeout(updateCheckboxState, 100);
+                });
+
+       
+                readCheckbox.addEventListener('change', function() {
+                    agreeBtn.disabled = !readCheckbox.checked;
+                });
+
+    
+                updateCheckboxState();
+                agreeBtn.disabled = true;
+
+                agreeBtn.addEventListener('click', function(){
+                        sessionStorage.setItem('disclaimerAccepted', '1');
+                        document.getElementById('Intro/Disclaimer').style.display = 'none';
+                });
 
         function setTimerColor(color){
             const timerEl = document.getElementById('timer');
